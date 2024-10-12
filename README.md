@@ -50,7 +50,7 @@ The backend API will be available at https://localhost:{port}
 API documentation is automatically generated using Swagger. Once the backend is running, you can view the API documentation by navigating to:
 
 ```
-https://localhost:5001/swagger/index.html
+https://localhost:{port}/swagger/index.html
 ```
 
 This provides detailed information about the API endpoints and allows you to test the API directly from the browser.
