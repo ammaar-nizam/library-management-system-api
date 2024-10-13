@@ -105,7 +105,6 @@ namespace LibraryManagementSystemAPI.Controllers
         ///
         ///     POST /api/books
         ///     {
-        ///        "id": 1,
         ///        "title": "Sample Book",
         ///        "author": "Sample Author",
         ///        "description": "Sample Description",
@@ -167,7 +166,6 @@ namespace LibraryManagementSystemAPI.Controllers
         ///
         ///     PUT /api/books/{id}
         ///     {
-        ///        "id": 1,
         ///        "title": "Sample Update Book",
         ///        "author": "Sample Update Author",
         ///        "description": "Sample Update Description",

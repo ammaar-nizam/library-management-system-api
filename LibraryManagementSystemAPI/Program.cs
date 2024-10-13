@@ -51,16 +51,12 @@ if (app.Environment.IsDevelopment())
     {
         options.SerializeAsV2 = true;
     });
-    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
-    {
-        options.InjectStylesheet("/swagger-ui/custom.css");
-    });
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();
