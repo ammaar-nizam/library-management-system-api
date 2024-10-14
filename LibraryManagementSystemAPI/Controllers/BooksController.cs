@@ -183,33 +183,42 @@ namespace LibraryManagementSystemAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> PutBook(long id, Book book)
         {   // Check if the user input is a positive number
-            if (id <= 0)    
+            if (id <= 0)
             {
                 return BadRequest("Validation Error: Id must be a positive number.");
             }
 
-            _context.Entry(book).State = EntityState.Modified;
+            if (book == null)
+            {
+                return BadRequest("Validation Error: Book object cannot be null.");
+            }
+
+            // Check if the book exists in the database
+            var existingBook = await _context.Books.FindAsync(id);
+            if (existingBook == null)
+            {
+                return NotFound($"Resource Not Found: A book with id {id} does not exist to update.");
+            }
+
+            // Update the existing book's properties
+            existingBook.Title = book.Title;
+            existingBook.Author = book.Author;
+            existingBook.Description = book.Description;
+
+            _context.Entry(existingBook).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();     
+                await _context.SaveChangesAsync();
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)
-            {   // If the book is not available to update
-                if (!BookExists(id))
-                {   // If the book is not available
-                    return NotFound($"Resource Not Found: A book with id {id} does not exist to update.");
-                }
-                else
-                {
-                    return StatusCode(500, "Database Error: An issue occurred while updating the book.");
-                }
-            }
-            // For unknown exceptions
-            catch (Exception)
             {
-                return StatusCode(500, "Internal Server Error: Something went wrong.");
+                return StatusCode(500, "Database Error: An issue occurred while updating the book.");
+            }
+            catch (Exception ex) // For unknown exceptions
+            {
+                return StatusCode(500, $"Internal Server Error: {ex.Message}");
             }
         }
 
