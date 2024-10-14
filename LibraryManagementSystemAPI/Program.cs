@@ -33,6 +33,18 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+// Allow requests from any origin
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 if (builder.Environment.IsDevelopment())
@@ -53,6 +65,9 @@ if (app.Environment.IsDevelopment())
     });
     app.UseSwaggerUI();
 }
+
+// Use the CORS policy
+app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();
 
