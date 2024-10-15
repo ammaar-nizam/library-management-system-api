@@ -33,13 +33,13 @@ git clone https://github.com/ammaar-nizam/library-management-system-api.git
 cd library-management-system-api
 ```
 
-Option A: Using Visual Studio
+## Option A: Using Visual Studio
 
 2A: Open LibraryManagementSystemAPI.sln using Visual Studio IDE
 
 3A: Once the project is open, press Ctrl + F5 to build the solution. 
 
-Option B: Using Command Line
+## Option B: Using Command Line
 
 2B. Install required NuGet packages
 
