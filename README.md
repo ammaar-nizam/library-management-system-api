@@ -1,6 +1,14 @@
-# LibraryManagementSystemAPI
+# Library Management System API
 
-This is a simple Library Management System API that provides the following endpoints on books - GET All, GET by Id, POST, PUT and DELETE. It is built using ASP.NET Core and Entity Framework with SQLite as the database.
+This is a simple Library Management System API that provides the following endpoints on books:
+
+- Lists All Books
+- Creates a Book
+- Finds a Book by Id
+- Updates a Book
+- Deletes a Book
+
+It is built using ASP.NET Core and Entity Framework with SQLite as the in-built database.
 
 ### Features
 
@@ -25,35 +33,43 @@ git clone https://github.com/ammaar-nizam/library-management-system-api.git
 cd library-management-system-api
 ```
 
-2. Install required NuGet packages
+## Option A: Using Visual Studio
+
+2A: Open LibraryManagementSystemAPI.sln using Visual Studio IDE
+
+3A: Once the project is open, press Ctrl + F5 to build the solution. 
+
+## Option B: Using Command Line
+
+2B. Install required NuGet packages
 
 ``` dotnet
 dotnet restore
 ```
 
-3. Update the database
+3B. Update the database
 
 ``` dotnet
 dotnet ef database update
 ```
 
-4. Run the backend server
+4B. Run the backend server
 
 ``` dotnet
 dotnet run
 ```
 
-The backend API will be available at https://localhost:{port}
+The backend API will be available at https://localhost:7080
 
 ### API Documentation
 
 API documentation is automatically generated using Swagger. Once the backend is running, you can view the API documentation by navigating to:
 
 ```
-https://localhost:{port}/swagger/index.html
+https://localhost:7080/swagger/index.html
 ```
 
-This provides detailed information about the API endpoints and allows you to test the API directly from the browser.
+This provides detailed information about the API endpoints and allows you to test the API directly from the browser. Also, you can find a PDF of the API Documentation in the root folder.
 
 ### Important Notes
 
