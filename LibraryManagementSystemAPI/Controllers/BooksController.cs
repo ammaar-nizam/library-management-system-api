@@ -130,14 +130,15 @@ namespace LibraryManagementSystemAPI.Controllers
                     return Conflict("Conflict on the Server: A book with this Id already exists.");
                 }
             }
-            // Check if the book already exists with the same title
-            var existingBookTitle = await _context.Books
-                .Where(b => b.Title.ToLower() == book.Title.ToLower() || b.Id == book.Id)
-                .FirstOrDefaultAsync();
 
-            if (existingBookTitle != null)
+            // Check if the book already exists with the same title
+            if (BookExistsWithSameTitle(book.Title, book.Id))
             {
-                return Conflict("Conflict on the Server: A book with this title already exists.");
+                return Conflict(new
+                {
+                    statusCode = 409,
+                    message = "Conflict on the Server: A book with this title already exists."
+                });
             }
 
             try
@@ -186,6 +187,16 @@ namespace LibraryManagementSystemAPI.Controllers
             if (id <= 0)
             {
                 return BadRequest("Validation Error: Id must be a positive number.");
+            }
+
+            // Check if the book already exists with the same title
+            if (BookExistsWithSameTitle(book.Title, id))
+            {
+                return Conflict(new
+                {
+                    statusCode = 409,
+                    message = "Conflict on the Server: A book with this title already exists."
+                });
             }
 
             if (book == null)
@@ -276,6 +287,13 @@ namespace LibraryManagementSystemAPI.Controllers
         private bool BookExists(long id)
         {
             return _context.Books.Any(e => e.Id == id);
+        }
+
+        private bool BookExistsWithSameTitle(string title, long bookId)
+        {
+            return _context.Books
+                            .AsNoTracking()
+                            .Any(e => e.Title.ToLower() == title.ToLower() && e.Id != bookId);
         }
 
     }
