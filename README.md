@@ -47,10 +47,10 @@ cd library-management-system-api
 dotnet restore
 ```
 
-3B. Update the database
+3B. Go into the LibraryManagementSystemAPI folder
 
-``` dotnet
-dotnet ef database update
+``` git
+cd LibraryManagementSystemAPI
 ```
 
 4B. Run the backend server
